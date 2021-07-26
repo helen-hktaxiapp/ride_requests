@@ -1,12 +1,12 @@
 class Ride {
-  final String pickupFormattedAddress;
-  final double pickupLatitude;
-  final double pickupLongitude;
-  final String pickupTitle;
-  final String dropoffFormattedAddress;
-  final double dropoffLatitude;
-  final double dropoffLongitude;
-  final String dropoffTitle;
+  final String? pickupFormattedAddress;
+  final double? pickupLatitude;
+  final double? pickupLongitude;
+  final String? pickupTitle;
+  final String? dropoffFormattedAddress;
+  final double? dropoffLatitude;
+  final double? dropoffLongitude;
+  final String? dropoffTitle;
 
   Ride({this.pickupFormattedAddress, this.pickupLatitude, this.pickupLongitude, this.pickupTitle, this.dropoffFormattedAddress, this.dropoffLatitude, this.dropoffLongitude, this.dropoffTitle});
 

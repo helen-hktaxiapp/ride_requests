@@ -25,7 +25,7 @@ void main() {
   });
 
   test('getRideRequestStream', () async {
-    Stream<Ride> stream = getRideRequestStream();
+    Stream<Ride?>? stream = getRideRequestStream() as Stream<Ride?>?;
     expect(stream, isInstanceOf<Stream<Ride>>());
   });
 }
