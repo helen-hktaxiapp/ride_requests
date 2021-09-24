@@ -23,6 +23,7 @@ public class RideRequestsPlugin implements MethodCallHandler, StreamHandler, Plu
 
   private BroadcastReceiver changeReceiver;
   private Registrar registrar;
+  private MethodChannel channel;
 
   private Map<String, String> initialRide = new HashMap<String, String>() {{
     put("pickup_formatted_address", "");
@@ -80,10 +81,18 @@ public class RideRequestsPlugin implements MethodCallHandler, StreamHandler, Plu
     }
   }
 
+  // @Override
+  // public void onMethodCall(MethodCall call, Result result) {
+  //   if (call.method.equals("getRideRequest")) {
+  //     result.success(initialRide);
+  //   } else {
+  //     result.notImplemented();
+  //   }
+  // }
   @Override
-  public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getRideRequest")) {
-      result.success(initialRide);
+  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+    if (call.method.equals("getPlatformVersion")) {
+      result.success("Android " + android.os.Build.VERSION.RELEASE);
     } else {
       result.notImplemented();
     }
@@ -103,6 +112,17 @@ public class RideRequestsPlugin implements MethodCallHandler, StreamHandler, Plu
   public boolean onNewIntent(Intent intent) {
     handleIntent(registrar.context(), intent, false);
     return false;
+  }
+
+  @Override
+  public void onAttachedToEngine(){
+    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "ride_requests");
+    channel.setMethodCallHandler(this);
+  }
+
+  @Override
+  public void onDetachedFromEngine(){
+    channel.setMethodCallHandler(null);
   }
 
   private BroadcastReceiver createChangeReceiver(final EventSink events) {
