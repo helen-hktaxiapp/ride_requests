@@ -115,13 +115,13 @@ public class RideRequestsPlugin implements MethodCallHandler, StreamHandler, Plu
   }
 
   @Override
-  public void onAttachedToEngine(){
+  public void onAttachedToEngine(FlutterPluginBinding flutterPluginBinding){
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "ride_requests");
     channel.setMethodCallHandler(this);
   }
 
   @Override
-  public void onDetachedFromEngine(){
+  public void onDetachedFromEngine(FlutterPluginBinding binding){
     channel.setMethodCallHandler(null);
   }
 
